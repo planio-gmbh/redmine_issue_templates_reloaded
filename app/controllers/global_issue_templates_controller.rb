@@ -2,12 +2,14 @@
 
 # noinspection RubocopInspection
 class GlobalIssueTemplatesController < ApplicationController
-  layout 'base'
+  layout 'admin'
+  self.main_menu = false
+  menu_item :redmine_issue_templates
+
   helper :issues
   helper :issue_templates
   include IssueTemplatesHelper
   include IssueTemplatesCommon
-  menu_item :issues
   before_action :find_object, only: %i[show update destroy]
   before_action :find_project, only: :update
   before_action :require_admin
