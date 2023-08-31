@@ -8,8 +8,8 @@ class GlobalIssueTemplatesController < ApplicationController
   include IssueTemplatesHelper
   include IssueTemplatesCommon
   menu_item :issues
-  before_action :find_object, only: %i[show edit update destroy]
-  before_action :find_project, only: %i[edit update]
+  before_action :find_object, only: %i[show update destroy]
+  before_action :find_project, only: :update
   before_action :require_admin
 
   #
@@ -54,21 +54,6 @@ class GlobalIssueTemplatesController < ApplicationController
     begin
       @global_issue_template.safe_attributes = valid_params
     rescue ActiveRecord::SerializationTypeMismatch, IssueTemplatesCommon::InvalidTemplateFormatError
-      flash[:error] = I18n.t(:builtin_fields_should_be_valid_json, default: 'Please enter a valid JSON fotmat string.')
-      render render_form_params.merge(action: :show)
-      return
-    end
-
-    save_and_flash(:notice_successful_update, :show)
-  end
-
-  def edit
-    # Change from request.post to request.patch for Rails4.
-    return unless request.patch? || request.put?
-
-    begin
-      @global_issue_template.safe_attributes = valid_params
-    rescue ActiveRecord::SerializationTypeMismatch
       flash[:error] = I18n.t(:builtin_fields_should_be_valid_json, default: 'Please enter a valid JSON fotmat string.')
       render render_form_params.merge(action: :show)
       return
