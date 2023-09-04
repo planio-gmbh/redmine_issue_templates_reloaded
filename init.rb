@@ -46,6 +46,7 @@ Redmine::Plugin.register :redmine_issue_templates do
     description 'Plugin to generate and use issue templates for each project to assist issue creation.'
     version '1.1.2'
     author_url 'https://agileware.jp/'
+    hidden true if respond_to?(:hidden)
     requires_redmine version_or_higher: '4.0'
     url 'https://github.com/agileware-jp/redmine_issue_templates'
 
