@@ -78,7 +78,7 @@
       pulldownUrl: '<%= j pulldown_url %>',
       isTriggeredBy: '<%= j is_triggered_by %>',
       loadUrl: '<%= j url_for(controller: 'issue_templates', action: 'load', project_id: project_id, is_triggered_by: is_triggered_by) %>',
-      shouldReplaced: '<%= j setting.should_replaced %>',
+      shouldReplaced: '<%= j setting.should_replaced.to_s %>',
       generalTextYes: '<%= l(:general_text_Yes) %>',
       generalTextNo : '<%= l(:general_text_No) %>',
       confirmMessage: '<%= j l(:label_template_applied, default: "Issue template is applied. You can revert with click 'Revert' link.") %>'
